@@ -6,7 +6,7 @@ Widget BrandName() {
     children: [
       Text(
         "Awesome",
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.red),
       ),
       Text(
         "App",

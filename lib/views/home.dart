@@ -12,7 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   List<ItemModels> items = new List();
 
   fetchImage() async {
@@ -28,9 +27,7 @@ class _HomeState extends State<Home> {
       items.add(itemModels);
     });
 
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -43,20 +40,45 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: BrandName(),
-        elevation: 0.0,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 200,
+            pinned: true,
+            elevation: 0.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                'https://images.pexels.com/photos/2792157/pexels-photo-2792157.jpeg',
+                fit: BoxFit.cover,
+              ),
+              title: BrandName(),
+              collapseMode: CollapseMode.parallax,
+            ),
+            actions: [
+              Icon(Icons.grid_view),
+              Icon(Icons.list_alt),
+              SizedBox(
+                width: 12,
+                height: 12,
+              )
+            ],
+          ),
+          viewImages()
+        ],
       ),
-      body: SingleChildScrollView(
+    );
+  }
+
+  Widget viewImages() => SliverToBoxAdapter(
         child: Container(
           child: Column(
             children: [
-              SizedBox(height: 16,),
+              SizedBox(
+                height: 16,
+              ),
               itemImages(items, context)
             ],
           ),
         ),
-      ),
-    );
-  }
+      );
 }
