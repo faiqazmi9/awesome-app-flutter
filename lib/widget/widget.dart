@@ -17,14 +17,14 @@ Widget BrandName() {
   );
 }
 
-Widget itemImages(List<ItemModels> itemImages, context) {
+Widget itemImages(List<ItemModels> itemImages, context, int count, double size) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 16),
     child: GridView.count(
       shrinkWrap: true,
-      crossAxisCount: 2,
+      crossAxisCount: count,
       physics: ClampingScrollPhysics(),
-      childAspectRatio: 0.6,
+      childAspectRatio: size,
       mainAxisSpacing: 6.0,
       crossAxisSpacing: 6.0,
       children: itemImages.map((item) {

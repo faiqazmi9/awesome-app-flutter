@@ -36,8 +36,8 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  void refreshState() {
-    fetchImage();
+  void refreshState(int count, double size) {
+    itemImages(items, context, count, size);
     super.initState();
   }
 
@@ -64,15 +64,13 @@ class _HomeState extends State<Home> {
               IconButton(
                 icon: Icon(Icons.grid_view),
                 onPressed: () {
-                  itemImages(items, context);
-                  refreshState();
+                  refreshState(2, 0.6);
                 },
               ),
               IconButton(
                 icon: Icon(Icons.list_alt),
                 onPressed: () {
-                  itemImages(items, context);
-                  refreshState();
+                  refreshState(1, 1.6);
                 },
               ),
               SizedBox(
@@ -94,7 +92,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 16,
               ),
-              itemImages(items, context)
+              itemImages(items, context, 2, 0.6)
             ],
           ),
         ),
