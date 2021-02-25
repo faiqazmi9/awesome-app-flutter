@@ -14,9 +14,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<ItemModels> items = new List();
 
+  int page = 1;
+  ScrollController _scrollController = new ScrollController();
+
   fetchImage() async {
     var response = await http.get(
-        "https://api.pexels.com/v1/curated?per_page=15",
+        "https://api.pexels.com/v1/curated/?page=" +
+            page.toString() +
+            " & per_page = 15",
         headers: {"Authorization": apiKey});
     //print(response.body.toString());
     Map<String, dynamic> jsonData = jsonDecode(response.body);
@@ -27,6 +32,7 @@ class _HomeState extends State<Home> {
       items.add(itemModels);
     });
 
+    page++;
     setState(() {});
   }
 
@@ -34,6 +40,19 @@ class _HomeState extends State<Home> {
   void initState() {
     fetchImage();
     super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        fetchImage();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   void refreshState(int count, double size) {
