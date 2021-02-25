@@ -36,11 +36,17 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  void refreshState() {
+    fetchImage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
+        shrinkWrap: true,
         slivers: [
           SliverAppBar(
             expandedHeight: 200,
@@ -55,8 +61,20 @@ class _HomeState extends State<Home> {
               collapseMode: CollapseMode.parallax,
             ),
             actions: [
-              Icon(Icons.grid_view),
-              Icon(Icons.list_alt),
+              IconButton(
+                icon: Icon(Icons.grid_view),
+                onPressed: () {
+                  itemImages(items, context);
+                  refreshState();
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.list_alt),
+                onPressed: () {
+                  itemImages(items, context);
+                  refreshState();
+                },
+              ),
               SizedBox(
                 width: 12,
                 height: 12,

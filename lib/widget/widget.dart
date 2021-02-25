@@ -1,4 +1,5 @@
 import 'package:awesome_app/model/item_models.dart';
+import 'package:awesome_app/views/detail_image.dart';
 import 'package:flutter/material.dart';
 
 Widget BrandName() {
@@ -28,15 +29,28 @@ Widget itemImages(List<ItemModels> itemImages, context) {
       crossAxisSpacing: 6.0,
       children: itemImages.map((item) {
         return GridTile(
-          child: Container(
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-              item.src.small,
-              fit: BoxFit.cover,
-            )),
-          ),
-        );
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailImage(
+                                imgUrl: item.src.original,
+                                photographer: item.photographer,
+                                photographerUrl: item.photographerUrl,
+                              )));
+                },
+                child: Hero(
+                  tag: item.src.original,
+                  child: Container(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          item.src.small,
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                )));
       }).toList(),
     ),
   );
